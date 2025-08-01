@@ -17,7 +17,7 @@ type TokenPayload =
   | null;
 
 export async function extractPayload(token?: string) {
-  const cookie = token || cookies().get("session")?.value;
+  const cookie = token || (await cookies()).get("session")?.value;
 
   if (!cookie) return null;
 
@@ -68,7 +68,7 @@ export async function createSession(data: JWTPayload) {
   }
 
   console.log("creating token with expiry refresh");
-  cookies().set("session", session, {
+  (await cookies()).set("session", session, {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
@@ -78,5 +78,5 @@ export async function createSession(data: JWTPayload) {
 }
 
 export async function deleteSession() {
-  cookies().delete("session");
+  (await cookies()).delete("session");
 }
