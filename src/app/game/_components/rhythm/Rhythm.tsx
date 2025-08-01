@@ -266,7 +266,7 @@ export function Rhythm() {
         initial={{ x: 10, y: 10, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
         transition={{ ease: "easeIn", delay: 0.1 }}
-        className="flex flex-col space-y-4 w-[400px] items-center bg-white/40 backdrop-blur-sm p-6 rounded shadow-lg mx-auto border border-white/40"
+        className="flex flex-col space-y-4 w-[400px] items-center bg-white/40 backdrop-blur-xs p-6 rounded-sm shadow-lg mx-auto border border-white/40"
       >
         <ScoreBox score={score} />
         <TimerBox remainingTime={gRemainingTime} duration={gameDuration} />

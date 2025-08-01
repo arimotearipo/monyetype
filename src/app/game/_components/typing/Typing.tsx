@@ -222,7 +222,7 @@ const TypingTest: React.FC = () => {
                         restDelta: 0.001,
                       },
                     }}
-                    className={`w-40 h-40 rounded-full absolute -bottom-[4rem] -left-[4rem] border-8 border-white ${
+                    className={`w-40 h-40 rounded-full absolute -bottom-16 -left-16 border-8 border-white ${
                       started
                         ? "border-r-orange-600 animate-spin"
                         : "bg-orange-600"
@@ -235,7 +235,7 @@ const TypingTest: React.FC = () => {
                       ease: "anticipate",
                       duration: 2,
                     }}
-                    className="bg-white/40 backdrop-blur-sm p-6 rounded shadow-lg w-full mx-auto border border-white/40"
+                    className="bg-white/40 backdrop-blur-xs p-6 rounded-sm shadow-lg w-full mx-auto border border-white/40"
                   >
                     <div className="flex justify-between items-center text-black">
                       <div>

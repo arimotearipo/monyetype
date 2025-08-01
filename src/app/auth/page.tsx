@@ -6,7 +6,7 @@ import Signup from "./_components/Signup";
 export default function AuthPage() {
   return (
     <Tabs defaultValue="login">
-      <TabsList className="grid grid-cols-2 rounded p-0 ">
+      <TabsList className="grid grid-cols-2 rounded-sm p-0 ">
         <TabsTrigger value="login">Login</TabsTrigger>
         <TabsTrigger value="signup">Signup</TabsTrigger>
       </TabsList>

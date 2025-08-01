@@ -40,7 +40,7 @@ const ResultPage: React.FC<ResultPageProps> = ({
       : 0;
 
   return (
-    <div className="bg-white p-6 rounded shadow-md w-11/12 max-w-screen-2xl ">
+    <div className="bg-white p-6 rounded-sm shadow-md w-11/12 max-w-(--breakpoint-2xl) ">
       <div className="flex flex-col items-center justify-center ">
         <h1 className="text-2xl font-bold mb-4 text-black">Results</h1>
         <p className="text-black">Words Per Minute (WPM): {wpm.toFixed(2)}</p>
@@ -49,7 +49,7 @@ const ResultPage: React.FC<ResultPageProps> = ({
         <p className="text-black">Errors: {errors}</p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-orange-600 text-white p-2 rounded mt-4"
+          className="bg-orange-600 text-white p-2 rounded-sm mt-4"
         >
           Try Again
         </button>

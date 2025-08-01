@@ -30,7 +30,7 @@ export default async function RootLayout({
           "flex flex-col h-screen overflow-hidden",
         )}
       >
-        <header className="grid grid-cols-3 p-2 bg-gradient-to-b from-gray-300 to-white">
+        <header className="grid grid-cols-3 p-2 bg-linear-to-b from-gray-300 to-white">
           <div></div>
           <span className="text-6xl text-center font-semibold tracking-wider">
             Monye<span className="text-orange-600">t</span>ype
@@ -38,7 +38,7 @@ export default async function RootLayout({
           </span>
           <ActionBar />
         </header>
-        <main className="flex-grow overflow-auto bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
+        <main className="grow overflow-auto bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-size-[16px_16px]">
           {children}
         </main>
         <footer className="h-[5%] flex items-center justify-center bg-black">

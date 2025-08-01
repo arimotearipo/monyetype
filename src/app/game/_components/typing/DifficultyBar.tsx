@@ -23,7 +23,7 @@ export const DifficultyBar = ({
       className="pb-10"
     >
       <Tabs value={difficulty} onValueChange={onDifficultyChange}>
-        <TabsList className="grid w-full grid-cols-3 rounded p-2">
+        <TabsList className="grid w-full grid-cols-3 rounded-sm p-2">
           <TabsTrigger value="easy">Easy</TabsTrigger>
           <TabsTrigger value="medium">Medium</TabsTrigger>
           <TabsTrigger value="hard">Hard</TabsTrigger>
