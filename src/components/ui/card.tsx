@@ -1,10 +1,10 @@
-import { cn } from "@/lib/utils";
-import React from "react";
+import { cn } from "@/lib/utils"
+import React from "react"
 
 type DivProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
->;
+>
 
 export function Card({ children, className, ...props }: DivProps) {
   return (
@@ -17,5 +17,5 @@ export function Card({ children, className, ...props }: DivProps) {
     >
       {children}
     </div>
-  );
+  )
 }

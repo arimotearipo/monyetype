@@ -60,7 +60,8 @@
   "license": "ISC",
   "prettier": {
     "tabWidth": 2,
-    "printWidth": 80
+    "printWidth": 80,
+    "semi": false
   },
   "overrides": {
     "@types/react": "19.1.9",

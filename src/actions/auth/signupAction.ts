@@ -1,6 +1,6 @@
-"use server";
+"use server"
 
-import { BaseServerActionResponse, SignupInfo } from "@/types";
+import { BaseServerActionResponse, SignupInfo } from "@/types"
 
 export async function signupAction(
   formData: SignupInfo,
@@ -11,7 +11,7 @@ export async function signupAction(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
-  });
+  })
 
-  return await res.json();
+  return await res.json()
 }

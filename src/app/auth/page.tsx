@@ -1,7 +1,6 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
-import Login from "./_components/Login";
-import Signup from "./_components/Signup";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import Login from "./_components/Login"
+import Signup from "./_components/Signup"
 
 export default function AuthPage() {
   return (
@@ -17,5 +16,5 @@ export default function AuthPage() {
         <Signup />
       </TabsContent>
     </Tabs>
-  );
+  )
 }

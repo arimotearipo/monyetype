@@ -1,12 +1,12 @@
-import React from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TDifficulty } from "@/types";
-import { motion } from "framer-motion";
+import React from "react"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { TDifficulty } from "@/types"
+import { motion } from "framer-motion"
 
 type DifficultyBarProps = {
-  difficulty: TDifficulty;
-  onDifficultyChange: (t: string) => void;
-};
+  difficulty: TDifficulty
+  onDifficultyChange: (t: string) => void
+}
 
 export const DifficultyBar = ({
   difficulty,
@@ -30,5 +30,5 @@ export const DifficultyBar = ({
         </TabsList>
       </Tabs>
     </motion.div>
-  );
-};
+  )
+}

@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
 export default function GameLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <div className="flex justify-center items-center h-full">{children}</div>
-  );
+  )
 }

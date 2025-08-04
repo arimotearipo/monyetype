@@ -1,7 +1,6 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
-import TypingTest from "./_components/typing/Typing";
-import { Rhythm } from "./_components/rhythm/Rhythm";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import TypingTest from "./_components/typing/Typing"
+import { Rhythm } from "./_components/rhythm/Rhythm"
 
 export default function GamePage() {
   return (
@@ -20,5 +19,5 @@ export default function GamePage() {
         <Rhythm />
       </TabsContent>
     </Tabs>
-  );
+  )
 }

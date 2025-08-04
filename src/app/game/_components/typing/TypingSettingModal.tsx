@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -7,15 +7,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { GearIcon } from "@radix-ui/react-icons";
-import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import { GearIcon } from "@radix-ui/react-icons"
+import { Slider } from "@/components/ui/slider"
+import { Button } from "@/components/ui/button"
 
 type TypeSettingModalProps = {
   // onTimerChange: any;
-  onMaxWordsChange: any;
-};
+  onMaxWordsChange: any
+}
 
 const TypingSettingModal = ({
   // onTimerChange,
@@ -23,15 +23,15 @@ const TypingSettingModal = ({
 }: TypeSettingModalProps) => {
   // const [timer, setTimer] = useState<number>(10);
   // console.log("🚀 ~ timer2:", timer);
-  const [maxWords, setMaxWords] = useState<number>(10);
-  const [isOpen, setIsOpen] = useState(false);
+  const [maxWords, setMaxWords] = useState<number>(10)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger
         onKeyDown={(event) => {
           if (event.key === " " || event.key === "Enter") {
-            event.preventDefault();
+            event.preventDefault()
           }
         }}
       >
@@ -69,8 +69,8 @@ const TypingSettingModal = ({
             type="submit"
             variant={"akmalmohtar"}
             onClick={() => {
-              onMaxWordsChange(maxWords);
-              setIsOpen(false);
+              onMaxWordsChange(maxWords)
+              setIsOpen(false)
             }}
           >
             Save
@@ -78,7 +78,7 @@ const TypingSettingModal = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
 
-export default TypingSettingModal;
+export default TypingSettingModal

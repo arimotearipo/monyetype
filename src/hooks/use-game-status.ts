@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer } from "react"
 
 const initialState = {
   score: 0,
   gameStarted: false,
   gameWon: false,
   gameEnded: false,
-};
+}
 
-type GameStatus = typeof initialState;
+type GameStatus = typeof initialState
 
 type ReducerAction = {
   type:
@@ -18,16 +18,16 @@ type ReducerAction = {
     | "stopGame"
     | "winGame"
     | "endGame"
-    | "resetGame";
-};
+    | "resetGame"
+}
 
 type GameStatusAction = {
-  addScore: () => void;
-  startStop: () => void;
-  winGame: () => void;
-  endGame: () => void;
-  retry: () => void;
-};
+  addScore: () => void
+  startStop: () => void
+  winGame: () => void
+  endGame: () => void
+  retry: () => void
+}
 
 function reducer(state: GameStatus, action: ReducerAction): GameStatus {
   switch (action.type) {
@@ -35,53 +35,53 @@ function reducer(state: GameStatus, action: ReducerAction): GameStatus {
       return {
         ...state,
         score: state.score + 1,
-      };
+      }
     case "endGame":
       return {
         ...state,
         gameEnded: true,
         gameStarted: false,
-      };
+      }
     case "startStopGame":
       return {
         ...state,
         gameStarted: !state.gameStarted,
-      };
+      }
     case "winGame":
       return {
         ...state,
         gameWon: true,
-      };
+      }
     case "resetGame":
-      return initialState;
+      return initialState
     default:
-      return state;
+      return state
   }
 }
 
 export function useGameStatus(): [GameStatus, GameStatusAction] {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   const addScore = useCallback(() => {
-    dispatch({ type: "addScore" });
-  }, []);
+    dispatch({ type: "addScore" })
+  }, [])
 
   // do i need to memoize this??
   const startStop = useCallback(() => {
-    dispatch({ type: "startStopGame" });
-  }, []);
+    dispatch({ type: "startStopGame" })
+  }, [])
 
   const winGame = useCallback(() => {
-    dispatch({ type: "winGame" });
-  }, []);
+    dispatch({ type: "winGame" })
+  }, [])
 
   const endGame = useCallback(() => {
-    dispatch({ type: "endGame" });
-  }, []);
+    dispatch({ type: "endGame" })
+  }, [])
 
   const retry = useCallback(() => {
-    dispatch({ type: "resetGame" });
-  }, []);
+    dispatch({ type: "resetGame" })
+  }, [])
 
   const action = {
     addScore,
@@ -89,7 +89,7 @@ export function useGameStatus(): [GameStatus, GameStatusAction] {
     winGame,
     endGame,
     retry,
-  };
+  }
 
-  return [state, action];
+  return [state, action]
 }

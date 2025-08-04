@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -8,31 +8,30 @@ import {
   DialogFooter,
   DialogClose,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { GearIcon } from "@/components/icons/GearIcon";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import type { TRhythmSettings } from "@/types";
-import { useRhythmSettingsStore } from "@/hooks/zustand/use-rhythm-settings";
-import { useForm, Controller } from "react-hook-form";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { GearIcon } from "@/components/icons/GearIcon"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
+import type { TRhythmSettings } from "@/types"
+import { useRhythmSettingsStore } from "@/hooks/zustand/use-rhythm-settings"
+import { useForm, Controller } from "react-hook-form"
 
 export default function SettingModal({ onOpen }: { onOpen: () => void }) {
-  const [open, setOpen] = useState(false);
-  const { rhythmSettings, saveSettings } = useRhythmSettingsStore((state) => ({
-    rhythmSettings: state.rhythmSettings,
-    saveSettings: state.saveSettings,
-  }));
+  const [open, setOpen] = useState(false)
+
+  const rhythmSettings = useRhythmSettingsStore((state) => state.rhythmSettings)
+  const saveSettings = useRhythmSettingsStore((state) => state.saveSettings)
 
   const { handleSubmit, control } = useForm<TRhythmSettings>({
     defaultValues: rhythmSettings,
-  });
+  })
 
   const submitSettings = (value: TRhythmSettings) => {
-    saveSettings(value);
-    setOpen(false);
-  };
+    saveSettings(value)
+    setOpen(false)
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -178,5 +177,5 @@ export default function SettingModal({ onOpen }: { onOpen: () => void }) {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

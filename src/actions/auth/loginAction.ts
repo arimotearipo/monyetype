@@ -1,15 +1,15 @@
-"use server";
+"use server"
 
-import { createSession } from "@/lib/session";
-import { LoginInfo, BaseServerActionResponse } from "@/types";
+import { createSession } from "@/lib/session"
+import { LoginInfo, BaseServerActionResponse } from "@/types"
 
 type LoginServerActionResponse = BaseServerActionResponse & {
   user: {
-    username: string;
-    id: string;
-    email: string;
-  };
-};
+    username: string
+    id: string
+    email: string
+  }
+}
 
 export async function loginAction(
   formData: LoginInfo,
@@ -20,11 +20,11 @@ export async function loginAction(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
-  });
+  })
 
-  const resJson = await res.json();
+  const resJson = await res.json()
 
-  await createSession({ userId: resJson.user.id });
+  await createSession({ userId: resJson.user.id })
 
-  return resJson;
+  return resJson
 }

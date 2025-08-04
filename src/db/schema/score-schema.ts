@@ -1,5 +1,5 @@
-import { integer, pgTable, serial, timestamp, real } from "drizzle-orm/pg-core";
-import { users } from "./user-schema";
+import { integer, pgTable, serial, timestamp, real } from "drizzle-orm/pg-core"
+import { users } from "./user-schema"
 
 export const rhythmScores = pgTable("rhythm_scores", {
   id: serial("id").primaryKey(),
@@ -10,7 +10,7 @@ export const rhythmScores = pgTable("rhythm_scores", {
   score: integer("score").notNull(),
   durationPlayed: real("duration_played").notNull(),
   speed: real("speed").notNull(),
-});
+})
 
-export type TRhythmScore = typeof rhythmScores.$inferSelect;
-export type TNewRhythmScore = typeof rhythmScores.$inferInsert;
+export type TRhythmScore = typeof rhythmScores.$inferSelect
+export type TNewRhythmScore = typeof rhythmScores.$inferInsert

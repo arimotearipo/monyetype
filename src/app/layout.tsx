@@ -1,23 +1,23 @@
-import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import ActionBar from "@/components/action-bar";
+import type { Metadata } from "next"
+import { IBM_Plex_Mono } from "next/font/google"
+import "./globals.css"
+import { cn } from "@/lib/utils"
+import ActionBar from "@/components/action-bar"
 
 const ibm_plex_mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: "500",
-});
+})
 
 export const metadata: Metadata = {
   title: "Monyetype",
   description: "Typing test app",
-};
+}
 
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -48,5 +48,5 @@ export default async function RootLayout({
         </footer>
       </body>
     </html>
-  );
+  )
 }

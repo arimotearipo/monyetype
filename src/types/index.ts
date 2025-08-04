@@ -1,34 +1,34 @@
-import { z } from "zod";
-import type { CheckedState } from "@radix-ui/react-checkbox";
+import { z } from "zod"
+import type { CheckedState } from "@radix-ui/react-checkbox"
 
-export type TDifficulty = "easy" | "medium" | "hard";
+export type TDifficulty = "easy" | "medium" | "hard"
 
 export type TRhythmSettings = {
-  gameDuration: number;
-  letterDuration: number;
-  enableNextLetter: CheckedState;
-  enableNumbers: CheckedState;
-  enableSpecialCharacters: CheckedState;
-  enableUppercaseLetters: CheckedState;
-  enableUppercaseSpecialCharacters: CheckedState;
-};
+  gameDuration: number
+  letterDuration: number
+  enableNextLetter: CheckedState
+  enableNumbers: CheckedState
+  enableSpecialCharacters: CheckedState
+  enableUppercaseLetters: CheckedState
+  enableUppercaseSpecialCharacters: CheckedState
+}
 
 export type SignupInfo = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+  username: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
 export type LoginInfo = {
-  email: string;
-  password: string;
-};
+  email: string
+  password: string
+}
 
 export type BaseServerActionResponse = {
-  success: boolean;
-  message: string;
-};
+  success: boolean
+  message: string
+}
 
 export const SignupSchema = z
   .object({
@@ -42,12 +42,12 @@ export const SignupSchema = z
   .refine(({ password, confirmPassword }) => password === confirmPassword, {
     message: "Passwords do not match!",
     path: ["password", "confirmPassword"],
-  });
+  })
 
 export const LoginSchema = z.object({
   email: z.string().min(1).email("Invalid email"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
-});
+})
 
 export const RhythmScoreSchema = z.object({
   userId: z.number(),
@@ -55,4 +55,4 @@ export const RhythmScoreSchema = z.object({
   score: z.number(),
   durationPlayed: z.number(),
   speed: z.number(),
-});
+})
