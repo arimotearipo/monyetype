@@ -1,20 +1,13 @@
-import React from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-} from "recharts";
+import React from "react"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts"
 
 interface ResultPageProps {
-  correctWords: number;
-  totalTypedChars: number;
-  errors: number;
-  timer: number;
-  wpmHistory: Array<{ time: number; wpm: number }>; // Array to store WPM history
-  defaultTimer: number;
+  correctWords: number
+  totalTypedChars: number
+  errors: number
+  timer: number
+  wpmHistory: Array<{ time: number; wpm: number }> // Array to store WPM history
+  defaultTimer: number
 }
 
 const ResultPage: React.FC<ResultPageProps> = ({
@@ -25,22 +18,22 @@ const ResultPage: React.FC<ResultPageProps> = ({
   wpmHistory,
   defaultTimer,
 }) => {
-  let wpm = 0;
+  let wpm = 0
   if (timer == 0) {
     // complete when timer ends
-    wpm = correctWords > 0 ? (correctWords / defaultTimer) * 60 : 0;
+    wpm = correctWords > 0 ? (correctWords / defaultTimer) * 60 : 0
   } else {
     //complete before timer ends
-    wpm = (correctWords / timer) * 60;
+    wpm = (correctWords / timer) * 60
   }
 
   const accuracy =
     totalTypedChars > 0
       ? ((totalTypedChars - errors) / totalTypedChars) * 100
-      : 0;
+      : 0
 
   return (
-    <div className="bg-white p-6 rounded shadow-md w-11/12 max-w-screen-2xl ">
+    <div className="bg-white p-6 rounded-sm shadow-md w-11/12 max-w-(--breakpoint-2xl) ">
       <div className="flex flex-col items-center justify-center ">
         <h1 className="text-2xl font-bold mb-4 text-black">Results</h1>
         <p className="text-black">Words Per Minute (WPM): {wpm.toFixed(2)}</p>
@@ -49,7 +42,7 @@ const ResultPage: React.FC<ResultPageProps> = ({
         <p className="text-black">Errors: {errors}</p>
         <button
           onClick={() => window.location.reload()}
-          className="bg-orange-600 text-white p-2 rounded mt-4"
+          className="bg-orange-600 text-white p-2 rounded-sm mt-4"
         >
           Try Again
         </button>
@@ -78,7 +71,7 @@ const ResultPage: React.FC<ResultPageProps> = ({
         </LineChart>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResultPage;
+export default ResultPage

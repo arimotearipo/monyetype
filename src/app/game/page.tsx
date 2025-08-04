@@ -1,7 +1,6 @@
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TabsContent } from "@radix-ui/react-tabs";
-import TypingTest from "./_components/typing/Typing";
-import { Rhythm } from "./_components/rhythm/Rhythm";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import TypingTest from "./_components/typing/Typing"
+import { Rhythm } from "./_components/rhythm/Rhythm"
 
 export default function GamePage() {
   return (
@@ -9,7 +8,7 @@ export default function GamePage() {
       defaultValue="typing"
       className="w-full h-full flex flex-col space-y-10 items-center"
     >
-      <TabsList className="w-[50%] grid grid-cols-2 rounded p-0">
+      <TabsList className="w-[50%] grid grid-cols-2 rounded-sm p-0">
         <TabsTrigger value="typing">Typing Test</TabsTrigger>
         <TabsTrigger value="rhythm">Rhythm Letter</TabsTrigger>
       </TabsList>
@@ -20,5 +19,5 @@ export default function GamePage() {
         <Rhythm />
       </TabsContent>
     </Tabs>
-  );
+  )
 }

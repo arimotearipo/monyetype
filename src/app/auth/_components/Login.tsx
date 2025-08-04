@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { loginAction } from "@/actions/auth/loginAction";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { LoginInfo, LoginSchema, BaseServerActionResponse } from "@/types";
-import { cn } from "@/lib/utils";
+import React, { useState } from "react"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { loginAction } from "@/actions/auth/loginAction"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { LoginInfo, LoginSchema, BaseServerActionResponse } from "@/types"
+import { cn } from "@/lib/utils"
 
 export default function Login() {
   const [submissionStatus, setSubmissionStatus] =
-    useState<BaseServerActionResponse | null>(null);
+    useState<BaseServerActionResponse | null>(null)
 
   const {
     handleSubmit,
@@ -27,16 +27,16 @@ export default function Login() {
       password: "",
     },
     resolver: zodResolver(LoginSchema),
-  });
+  })
 
   const handleLogin = async (data: LoginInfo) => {
-    const res = await loginAction(data);
-    setSubmissionStatus(res);
+    const res = await loginAction(data)
+    setSubmissionStatus(res)
 
     if (res.success) {
-      localStorage.setItem("username", res.user.username);
+      localStorage.setItem("username", res.user.username)
     }
-  };
+  }
 
   return (
     <motion.div
@@ -98,5 +98,5 @@ export default function Login() {
         </div>
       </Card>
     </motion.div>
-  );
+  )
 }

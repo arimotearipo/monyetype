@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { signupAction } from "@/actions/auth/signupAction";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { BaseServerActionResponse, SignupInfo, SignupSchema } from "@/types";
-import { cn } from "@/lib/utils";
+import React, { useState } from "react"
+import { Card } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { signupAction } from "@/actions/auth/signupAction"
+import { LoadingSpinner } from "@/components/ui/loading-spinner"
+import { useForm, Controller } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { BaseServerActionResponse, SignupInfo, SignupSchema } from "@/types"
+import { cn } from "@/lib/utils"
 
 export default function Signup() {
   const [submissionStatus, setSubmissionStatus] =
-    useState<BaseServerActionResponse | null>(null);
+    useState<BaseServerActionResponse | null>(null)
   const {
     handleSubmit,
     control,
@@ -28,12 +28,12 @@ export default function Signup() {
       confirmPassword: "",
     },
     resolver: zodResolver(SignupSchema),
-  });
+  })
 
   const handleSignup = async (data: SignupInfo) => {
-    const res = await signupAction(data);
-    setSubmissionStatus(res);
-  };
+    const res = await signupAction(data)
+    setSubmissionStatus(res)
+  }
 
   return (
     <motion.div
@@ -117,5 +117,5 @@ export default function Signup() {
         </div>
       </Card>
     </motion.div>
-  );
+  )
 }

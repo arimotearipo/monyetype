@@ -1,17 +1,17 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
-import { useAuth } from "@/hooks/use-auth";
-import { logoutAction } from "@/actions/auth/logoutAction";
+"use client"
+import { useRouter } from "next/navigation"
+import { Button } from "./ui/button"
+import { useAuth } from "@/hooks/use-auth"
+import { logoutAction } from "@/actions/auth/logoutAction"
 
 export default function ActionBar() {
-  const { isAuthenticated, username, deauthenticate } = useAuth();
-  const route = useRouter();
+  const { isAuthenticated, username, deauthenticate } = useAuth()
+  const route = useRouter()
 
   const handleLogout = () => {
-    logoutAction();
-    deauthenticate();
-  };
+    logoutAction()
+    deauthenticate()
+  }
 
   return (
     <div className="flex flex-row space-x-4 items-center">
@@ -29,5 +29,5 @@ export default function ActionBar() {
       )}
       {!!username && <p className="place-items-end">Welcome, {username}</p>}
     </div>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import { BaseServerActionResponse } from "@/types";
+import { BaseServerActionResponse } from "@/types"
 
 type ScoreData = {
-  userId: string;
-  score: number;
-};
+  userId: string
+  score: number
+}
 
 export async function saveScoreAction(
   scoreData: ScoreData,
@@ -14,7 +14,7 @@ export async function saveScoreAction(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(scoreData),
-  });
+  })
 
-  return await res.json();
+  return await res.json()
 }

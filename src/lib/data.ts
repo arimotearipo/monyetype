@@ -118,4 +118,4 @@ export const words = [
   "sun",
   "tap",
   "urn",
-];
+]

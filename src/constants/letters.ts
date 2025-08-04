@@ -25,7 +25,7 @@ export const LOWER_CASE = [
   "x",
   "y",
   "z",
-];
+]
 
 export const UPPER_CASE = [
   "A",
@@ -54,8 +54,8 @@ export const UPPER_CASE = [
   "X",
   "Y",
   "Z",
-];
-export const NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+]
+export const NUMBERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 export const SPECIAL_CHARS_NO_SHIFT = [
   "`",
@@ -69,7 +69,7 @@ export const SPECIAL_CHARS_NO_SHIFT = [
   ",",
   ".",
   "/",
-];
+]
 
 export const SPECIAL_CHARS_SHIFT = [
   "~",
@@ -93,4 +93,4 @@ export const SPECIAL_CHARS_SHIFT = [
   "<",
   ">",
   "?",
-];
+]

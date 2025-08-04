@@ -1,87 +1,87 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { getRandomWords } from "@/lib/getRandomWords";
-import ResultPage from "./Result";
-import { DifficultyBar } from "./DifficultyBar";
-import { TDifficulty } from "@/types";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import TypingSettingModal from "./TypingSettingModal";
+"use client"
+import React, { useState, useEffect } from "react"
+import { getRandomWords } from "@/lib/getRandomWords"
+import ResultPage from "./Result"
+import { DifficultyBar } from "./DifficultyBar"
+import { TDifficulty } from "@/types"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import TypingSettingModal from "./TypingSettingModal"
 
-const TIMER: number = 10;
-const MAX_WORDS: number = 10;
+const TIMER: number = 10
+const MAX_WORDS: number = 10
 
 interface WPMEntry {
-  time: number;
-  wpm: number;
+  time: number
+  wpm: number
 }
 
 const TypingTest: React.FC = () => {
-  const [words, setWords] = useState<string[]>([]);
-  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [currentLetterIndex, setCurrentLetterIndex] = useState<number>(0);
-  const [correctWords, setCorrectWords] = useState<number>(0);
-  const [totalTypedChars, setTotalTypedChars] = useState<number>(0);
-  const [errors, setErrors] = useState<number>(0);
-  const [timer, setTimer] = useState<number>(TIMER);
-  const [started, setStarted] = useState<boolean>(false);
-  const [testEnded, setTestEnded] = useState<boolean>(false);
-  const [wpmHistory, setWpmHistory] = useState<WPMEntry[]>([]);
-  const [lastUpdate, setLastUpdate] = useState<number>(0);
-  const [difficulty, setDifficulty] = useState<TDifficulty>("medium");
-  const [maxWords, setMaxWords] = useState<number>(MAX_WORDS);
+  const [words, setWords] = useState<string[]>([])
+  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0)
+  const [currentLetterIndex, setCurrentLetterIndex] = useState<number>(0)
+  const [correctWords, setCorrectWords] = useState<number>(0)
+  const [totalTypedChars, setTotalTypedChars] = useState<number>(0)
+  const [errors, setErrors] = useState<number>(0)
+  const [timer, setTimer] = useState<number>(TIMER)
+  const [started, setStarted] = useState<boolean>(false)
+  const [testEnded, setTestEnded] = useState<boolean>(false)
+  const [wpmHistory, setWpmHistory] = useState<WPMEntry[]>([])
+  const [lastUpdate, setLastUpdate] = useState<number>(0)
+  const [difficulty, setDifficulty] = useState<TDifficulty>("medium")
+  const [maxWords, setMaxWords] = useState<number>(MAX_WORDS)
 
   useEffect(() => {
-    setWords(getRandomWords(maxWords, difficulty).split(" "));
-  }, [difficulty, maxWords]);
+    setWords(getRandomWords(maxWords, difficulty).split(" "))
+  }, [difficulty, maxWords])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (testEnded) return;
+      if (testEnded) return
       if (!started) {
-        setStarted(true); // Start the timer on the first key press
+        setStarted(true) // Start the timer on the first key press
       }
 
-      const currentWord = words[currentWordIndex];
-      const currentLetter = currentWord?.[currentLetterIndex];
+      const currentWord = words[currentWordIndex]
+      const currentLetter = currentWord?.[currentLetterIndex]
 
       if (event.key === currentLetter) {
-        setCurrentLetterIndex(currentLetterIndex + 1);
-        setTotalTypedChars(totalTypedChars + 1);
+        setCurrentLetterIndex(currentLetterIndex + 1)
+        setTotalTypedChars(totalTypedChars + 1)
       } else if (event.key === " ") {
         if (currentLetterIndex === currentWord.length) {
-          setCurrentWordIndex(currentWordIndex + 1);
-          setCurrentLetterIndex(0);
-          setCorrectWords(correctWords + 1);
+          setCurrentWordIndex(currentWordIndex + 1)
+          setCurrentLetterIndex(0)
+          setCorrectWords(correctWords + 1)
         }
-        setTotalTypedChars(totalTypedChars + 1);
+        setTotalTypedChars(totalTypedChars + 1)
       } else {
-        setErrors(errors + 1);
-        setTotalTypedChars(totalTypedChars + 1);
+        setErrors(errors + 1)
+        setTotalTypedChars(totalTypedChars + 1)
       }
 
       if (started) {
-        const elapsedTime = TIMER - timer;
+        const elapsedTime = TIMER - timer
 
         // Update only if 1 second has passed
         if (elapsedTime >= lastUpdate + 1) {
-          const wpm = ((correctWords / elapsedTime) * 60).toFixed(2);
+          const wpm = ((correctWords / elapsedTime) * 60).toFixed(2)
           setWpmHistory((prevHistory) => [
             ...prevHistory.filter((entry) => entry.time !== elapsedTime),
             { time: elapsedTime, wpm: parseFloat(wpm) },
-          ]);
-          setLastUpdate(elapsedTime); // Update lastUpdate time
+          ])
+          setLastUpdate(elapsedTime) // Update lastUpdate time
         }
       }
-    };
+    }
 
     // Attach keydown listener
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown)
 
     return () => {
       // Cleanup listener on unmount and when test ends
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+      window.removeEventListener("keydown", handleKeyDown)
+    }
   }, [
     words,
     currentWordIndex,
@@ -93,51 +93,51 @@ const TypingTest: React.FC = () => {
     testEnded,
     timer,
     lastUpdate,
-  ]);
+  ])
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: NodeJS.Timeout | null = null
 
     if (started && timer > 0) {
       interval = setInterval(() => {
-        setTimer((prevTime) => prevTime - 1);
-      }, 1000);
+        setTimer((prevTime) => prevTime - 1)
+      }, 1000)
     }
 
     // Check the end of the test
     if (words.length > 0) {
       if (timer === 0) {
-        setTimer(0);
-        setTestEnded(true);
-        clearInterval(interval!);
+        setTimer(0)
+        setTestEnded(true)
+        clearInterval(interval!)
       }
       if (currentWordIndex >= words.length) {
-        setTimer(lastUpdate);
-        setTestEnded(true);
-        clearInterval(interval!);
+        setTimer(lastUpdate)
+        setTestEnded(true)
+        clearInterval(interval!)
       }
     }
 
-    return () => clearInterval(interval!);
-  }, [started, timer, currentWordIndex, words.length, words, lastUpdate]);
+    return () => clearInterval(interval!)
+  }, [started, timer, currentWordIndex, words.length, words, lastUpdate])
 
   const handleReset = () => {
-    setWords(getRandomWords(MAX_WORDS, difficulty).split(" "));
-    setCurrentWordIndex(0);
-    setCurrentLetterIndex(0);
-    setCorrectWords(0);
-    setTotalTypedChars(0);
-    setErrors(0);
-    setTimer(timer);
-    setStarted(false);
-    setTestEnded(false);
-    setWpmHistory([]); // Reset WPM history
-  };
+    setWords(getRandomWords(MAX_WORDS, difficulty).split(" "))
+    setCurrentWordIndex(0)
+    setCurrentLetterIndex(0)
+    setCorrectWords(0)
+    setTotalTypedChars(0)
+    setErrors(0)
+    setTimer(timer)
+    setStarted(false)
+    setTestEnded(false)
+    setWpmHistory([]) // Reset WPM history
+  }
 
   const handleDifficultyChange = (tabValue: string) => {
-    setDifficulty(tabValue as TDifficulty);
-    handleReset();
-  };
+    setDifficulty(tabValue as TDifficulty)
+    handleReset()
+  }
 
   // const handleTimerChange = (value: number) => {
   //   setTimer(value);
@@ -145,9 +145,9 @@ const TypingTest: React.FC = () => {
   // };
 
   const handleMaxWordsChange = (value: number) => {
-    setMaxWords(value);
-    handleReset();
-  };
+    setMaxWords(value)
+    handleReset()
+  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full py-12">
@@ -222,7 +222,7 @@ const TypingTest: React.FC = () => {
                         restDelta: 0.001,
                       },
                     }}
-                    className={`w-40 h-40 rounded-full absolute -bottom-[4rem] -left-[4rem] border-8 border-white ${
+                    className={`w-40 h-40 rounded-full absolute -bottom-16 -left-16 border-8 border-white ${
                       started
                         ? "border-r-orange-600 animate-spin"
                         : "bg-orange-600"
@@ -235,7 +235,7 @@ const TypingTest: React.FC = () => {
                       ease: "anticipate",
                       duration: 2,
                     }}
-                    className="bg-white/40 backdrop-blur-sm p-6 rounded shadow-lg w-full mx-auto border border-white/40"
+                    className="bg-white/40 backdrop-blur-xs p-6 rounded-sm shadow-lg w-full mx-auto border border-white/40"
                   >
                     <div className="flex justify-between items-center text-black">
                       <div>
@@ -260,7 +260,7 @@ const TypingTest: React.FC = () => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TypingTest;
+export default TypingTest
