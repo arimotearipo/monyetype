@@ -42,8 +42,8 @@ export default function Login() {
 
   return (
     <motion.div
-      initial={{ y: 0, opacity: 0 }}
-      animate={{ y: 80, opacity: 1 }}
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ ease: "easeIn" }}
     >
       <Card className="w-[400px] space-y-4">

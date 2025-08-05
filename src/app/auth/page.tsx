@@ -8,14 +8,14 @@ export default function AuthPage() {
       defaultValue="login"
       className="w-full h-full flex flex-col space-y-10 items-center"
     >
-      <TabsList className="grid grid-cols-2 rounded-sm p-0 ">
+      <TabsList className="grid grid-cols-2 rounded-sm p-0">
         <TabsTrigger value="login">Login</TabsTrigger>
         <TabsTrigger value="signup">Signup</TabsTrigger>
       </TabsList>
-      <TabsContent value="login">
+      <TabsContent value="login" className="flex items-start">
         <Login />
       </TabsContent>
-      <TabsContent value="signup">
+      <TabsContent value="signup" className="flex items-start">
         <Signup />
       </TabsContent>
     </Tabs>
