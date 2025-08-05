@@ -16,11 +16,8 @@ import { cn } from "@/lib/utils"
 export default function Signup() {
   const [submissionStatus, setSubmissionStatus] =
     useState<BaseServerActionResponse | null>(null)
-  const {
-    handleSubmit,
-    control,
-    formState: { isValid, isSubmitting },
-  } = useForm<SignupInfo>({
+
+  const form = useForm<SignupInfo>({
     defaultValues: {
       username: "",
       email: "",
@@ -29,6 +26,12 @@ export default function Signup() {
     },
     resolver: zodResolver(SignupSchema),
   })
+
+  const {
+    handleSubmit,
+    control,
+    formState: { isValid, isSubmitting },
+  } = form
 
   const handleSignup = async (data: SignupInfo) => {
     const res = await signupAction(data)

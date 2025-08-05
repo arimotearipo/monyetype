@@ -24,6 +24,7 @@ const ScoreBox = memo(function ScoreBox({ score }: { score: number }) {
           ease: "easeInOut",
           duration: 1,
         }}
+        className="text-2xl"
       >
         {score}
       </motion.span>
@@ -74,6 +75,7 @@ const LetterDisplayBox = memo(function LetterDisplayBox({
           ease: "anticipate",
           duration: 0.3,
         }}
+        className="text-7xl"
       >
         {letters[0]}
       </motion.span>
@@ -89,6 +91,7 @@ const LetterDisplayBox = memo(function LetterDisplayBox({
             ease: "anticipate",
             duration: 0.3,
           }}
+          className={`text-4xl text-gray-500`}
         >
           {letters[1]}
         </motion.span>

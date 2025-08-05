@@ -1,5 +1,6 @@
+import { routes } from "@/lib/routes"
 import { redirect } from "next/navigation"
 
 export default function App() {
-  redirect("/game")
+  redirect(routes.game)
 }
