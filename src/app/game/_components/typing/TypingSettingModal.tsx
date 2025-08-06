@@ -11,6 +11,7 @@ import {
 import { GearIcon } from "@radix-ui/react-icons"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 
 type TypeSettingModalProps = {
   // onTimerChange: any;
@@ -21,7 +22,7 @@ const TypingSettingModal = ({
   // onTimerChange,
   onMaxWordsChange,
 }: TypeSettingModalProps) => {
-  // const [timer, setTimer] = useState<number>(10);
+  const [timer, setTimer] = useState<number>(10)
   // console.log("🚀 ~ timer2:", timer);
   const [maxWords, setMaxWords] = useState<number>(10)
   const [isOpen, setIsOpen] = useState(false)
@@ -42,26 +43,21 @@ const TypingSettingModal = ({
           <DialogTitle>Game Settings</DialogTitle>
           <DialogDescription>Set custom time and words count</DialogDescription>
           <div className="flex flex-col justify-between gap-6">
-            <span className="text-gray-500">
-              Time (Locked){" "}
-              <Slider
-                disabled
-                defaultValue={[10]}
-                // value={[timer]}
-                max={100}
-                step={1}
-                // onValueChange={(value) => setTimer(value[0])}
-              />
-            </span>
-            <span>
-              Words Count{" "}
-              <Slider
-                defaultValue={[10]}
-                max={100}
-                step={1}
-                onValueChange={(value) => setMaxWords(value[0])}
-              />
-            </span>
+            <Label>Time</Label>
+            <Slider
+              defaultValue={[10]}
+              value={[timer]}
+              max={100}
+              step={1}
+              onValueChange={(value) => setTimer(value[0])}
+            />
+            <Label>Words Count</Label>
+            <Slider
+              defaultValue={[10]}
+              max={100}
+              step={1}
+              onValueChange={(value) => setMaxWords(value[0])}
+            />
           </div>
         </DialogHeader>
         <DialogFooter>

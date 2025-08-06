@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import TypingSettingModal from "./TypingSettingModal"
 import { cn } from "@/lib/utils"
+import { CircleIcon } from "@/components/icons/CircleIcon"
 
 const TIMER: number = 10
 const MAX_WORDS: number = 10
@@ -17,7 +18,7 @@ interface WPMEntry {
   wpm: number
 }
 
-const TypingTest: React.FC = () => {
+export function TypingTest() {
   const [words, setWords] = useState<string[]>([])
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0)
   const [currentLetterIndex, setCurrentLetterIndex] = useState<number>(0)
@@ -36,65 +37,65 @@ const TypingTest: React.FC = () => {
     setWords(getRandomWords(maxWords, difficulty).split(" "))
   }, [difficulty, maxWords])
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (testEnded) return
-      if (!started) {
-        setStarted(true) // Start the timer on the first key press
-      }
+  // useEffect(() => {
+  //   const handleKeyDown = (event: KeyboardEvent) => {
+  //     if (testEnded) return
+  //     if (!started) {
+  //       setStarted(true) // Start the timer on the first key press
+  //     }
 
-      const currentWord = words[currentWordIndex]
-      const currentLetter = currentWord?.[currentLetterIndex]
+  //     const currentWord = words[currentWordIndex]
+  //     const currentLetter = currentWord?.[currentLetterIndex]
 
-      if (event.key === currentLetter) {
-        setCurrentLetterIndex(currentLetterIndex + 1)
-        setTotalTypedChars(totalTypedChars + 1)
-      } else if (event.key === " ") {
-        if (currentLetterIndex === currentWord.length) {
-          setCurrentWordIndex(currentWordIndex + 1)
-          setCurrentLetterIndex(0)
-          setCorrectWords(correctWords + 1)
-        }
-        setTotalTypedChars(totalTypedChars + 1)
-      } else {
-        setErrors(errors + 1)
-        setTotalTypedChars(totalTypedChars + 1)
-      }
+  //     if (event.key === currentLetter) {
+  //       setCurrentLetterIndex(currentLetterIndex + 1)
+  //       setTotalTypedChars(totalTypedChars + 1)
+  //     } else if (event.key === " ") {
+  //       if (currentLetterIndex === currentWord.length) {
+  //         setCurrentWordIndex(currentWordIndex + 1)
+  //         setCurrentLetterIndex(0)
+  //         setCorrectWords(correctWords + 1)
+  //       }
+  //       setTotalTypedChars(totalTypedChars + 1)
+  //     } else {
+  //       setErrors(errors + 1)
+  //       setTotalTypedChars(totalTypedChars + 1)
+  //     }
 
-      if (started) {
-        const elapsedTime = TIMER - timer
+  //     if (started) {
+  //       const elapsedTime = TIMER - timer
 
-        // Update only if 1 second has passed
-        if (elapsedTime >= lastUpdate + 1) {
-          const wpm = ((correctWords / elapsedTime) * 60).toFixed(2)
-          setWpmHistory((prevHistory) => [
-            ...prevHistory.filter((entry) => entry.time !== elapsedTime),
-            { time: elapsedTime, wpm: parseFloat(wpm) },
-          ])
-          setLastUpdate(elapsedTime) // Update lastUpdate time
-        }
-      }
-    }
+  //       // Update only if 1 second has passed
+  //       if (elapsedTime >= lastUpdate + 1) {
+  //         const wpm = ((correctWords / elapsedTime) * 60).toFixed(2)
+  //         setWpmHistory((prevHistory) => [
+  //           ...prevHistory.filter((entry) => entry.time !== elapsedTime),
+  //           { time: elapsedTime, wpm: parseFloat(wpm) },
+  //         ])
+  //         setLastUpdate(elapsedTime) // Update lastUpdate time
+  //       }
+  //     }
+  //   }
 
-    // Attach keydown listener
-    window.addEventListener("keydown", handleKeyDown)
+  //   // Attach keydown listener
+  //   window.addEventListener("keydown", handleKeyDown)
 
-    return () => {
-      // Cleanup listener on unmount and when test ends
-      window.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [
-    words,
-    currentWordIndex,
-    currentLetterIndex,
-    correctWords,
-    started,
-    totalTypedChars,
-    errors,
-    testEnded,
-    timer,
-    lastUpdate,
-  ])
+  //   return () => {
+  //     // Cleanup listener on unmount and when test ends
+  //     window.removeEventListener("keydown", handleKeyDown)
+  //   }
+  // }, [
+  //   words,
+  //   currentWordIndex,
+  //   currentLetterIndex,
+  //   correctWords,
+  //   started,
+  //   totalTypedChars,
+  //   errors,
+  //   testEnded,
+  //   timer,
+  //   lastUpdate,
+  // ])
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null
@@ -164,7 +165,7 @@ const TypingTest: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col w-full h-full py-12">
+    <div className="flex flex-col w-screen h-full py-12 px-40">
       <div className="place-self-center">
         <DifficultyBar
           difficulty={difficulty}
@@ -175,7 +176,7 @@ const TypingTest: React.FC = () => {
       {/* words array */}
       <>
         {words.length > 0 && (
-          <div className="mb-10 text-black text-4xl w-3/4 lg:w-11/12 mx-auto ">
+          <div className="mb-10 text-black text-4xl w-3/4 lg:w-full">
             {words.map((word, wordIndex) => (
               <motion.span
                 initial={{ opacity: 0.5 }}
@@ -215,61 +216,56 @@ const TypingTest: React.FC = () => {
       {/* score */}
       <>
         {words.length > 0 && (
-          <>
-            <div className="relative mt-10 w-1/2">
-              <motion.div
-                key={difficulty}
-                initial={{ x: -40, y: 40, opacity: 0, scale: 0.5 }}
-                animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0, 0.71, 0.2, 1.01],
-                  scale: {
-                    type: "spring",
-                    damping: 5,
-                    stiffness: 100,
-                    restDelta: 0.001,
-                  },
-                }}
-                className={cn(
-                  "w-40 h-40 rounded-full absolute border-8 border-white",
-                  {
-                    "border-r-orange-600 animate-spin": started,
-                    "bg-orange-600": !started,
-                  },
-                )}
-              ></motion.div>
-              <motion.div
-                initial={{ x: 20, y: -20, opacity: 0 }}
-                animate={{ x: 0, y: 0, opacity: 1 }}
-                transition={{
-                  ease: "anticipate",
-                  duration: 2,
-                }}
-                className="bg-white/40 backdrop-blur-xs p-6 rounded-sm shadow-lg w-full mx-auto border border-white/40"
-              >
-                <div className="flex justify-between items-center text-black">
-                  <div>
-                    <p>Time Left: {timer}s</p>
-                    <p>Correct Words: {correctWords}</p>
-                  </div>
-                  <span className="flex gap-2">
-                    <TypingSettingModal
-                      // onTimerChange={handleTimerChange}
-                      onMaxWordsChange={handleMaxWordsChange}
-                    />
-                    <Button onClick={handleReset} variant="akmalmohtar">
-                      Reset
-                    </Button>
-                  </span>
+          <div className="relative mt-10 w-full">
+            {/* orange circle */}
+            {/* <motion.div
+              key={difficulty}
+              initial={{ x: -40, y: 40, opacity: 0, scale: 0.5 }}
+              animate={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                ease: [0, 0.71, 0.2, 1.01],
+                scale: {
+                  type: "spring",
+                  damping: 5,
+                  stiffness: 100,
+                  restDelta: 0.001,
+                },
+              }}
+              className={cn("absolute")}
+            >
+              <CircleIcon color="#f54a00" size={150} />
+            </motion.div> */}
+
+            {/* score box */}
+            <motion.div
+              initial={{ x: 20, y: -20, opacity: 0 }}
+              animate={{ x: 0, y: 0, opacity: 1 }}
+              transition={{
+                ease: "anticipate",
+                duration: 2,
+              }}
+              className="bg-white/40 border backdrop-blur-xs w-1/2 p-6 rounded-sm shadow-lg place-self-center relative"
+            >
+              <div className="flex justify-between items-center text-black ">
+                <div>
+                  <p>Time Left: {timer}s</p>
+                  <p>Correct Words: {correctWords}</p>
                 </div>
-              </motion.div>
-            </div>
-          </>
+                <span className="flex gap-2">
+                  <TypingSettingModal
+                    // onTimerChange={handleTimerChange}
+                    onMaxWordsChange={handleMaxWordsChange}
+                  />
+                  <Button onClick={handleReset} variant="akmalmohtar">
+                    Reset
+                  </Button>
+                </span>
+              </div>
+            </motion.div>
+          </div>
         )}
       </>
     </div>
   )
 }
-
-export default TypingTest

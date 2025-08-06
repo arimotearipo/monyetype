@@ -1,26 +1,35 @@
-import { words } from "./data"
+import { faker } from "@faker-js/faker"
 
 export const getRandomWords = (
   num: number,
   difficulty: "easy" | "medium" | "hard",
 ) => {
-  const filteredWords = words.filter((word) => {
-    switch (difficulty) {
-      case "easy":
-        return word.length <= 4
-      case "medium":
-        return word.length >= 5 && word.length <= 8
-      case "hard":
-        return word.length >= 9
-      default:
-        return word.length >= 5 && word.length <= 8
-    }
-  })
+  let max
+  let min
+  switch (difficulty) {
+    case "easy":
+      max = 4
+      min = 0
+      break
+    case "medium":
+      min = 5
+      max = 8
+      break
+    case "hard":
+      min = 9
+      max = undefined
+    default:
+      min = 5
+      max = 8
+  }
 
   const randomWords = []
+
   for (let i = 0; i < num; i++) {
-    const randomIndex = Math.floor(Math.random() * filteredWords.length)
-    randomWords.push(filteredWords[randomIndex])
+    const randomWord = faker.word.sample({ length: { min, max } })
+
+    randomWords.push(randomWord)
   }
+
   return randomWords.join(" ")
 }

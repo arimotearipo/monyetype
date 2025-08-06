@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import TypingTest from "./_components/typing/Typing"
+import { TypingTest } from "./_components/typing/Typing"
 import { Rhythm } from "./_components/rhythm/Rhythm"
 
 export default function GamePage() {
@@ -12,10 +12,7 @@ export default function GamePage() {
         <TabsTrigger value="typing">Typing Test</TabsTrigger>
         <TabsTrigger value="rhythm">Rhythm Letter</TabsTrigger>
       </TabsList>
-      <TabsContent
-        value="typing"
-        className="flex items-start border border-red-500"
-      >
+      <TabsContent value="typing" className="flex items-start">
         <TypingTest />
       </TabsContent>
       <TabsContent value="rhythm" className="flex items-start">
