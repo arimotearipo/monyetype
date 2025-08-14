@@ -33,7 +33,7 @@ export type BaseServerActionResponse = {
 export const SignupSchema = z
   .object({
     username: z.string().min(3, "Username must be at least 3 characters long"),
-    email: z.string().email("Invalid email"),
+    email: z.email("Invalid email"),
     password: z.string().min(6, "Password must be at least 6 characters long "),
     confirmPassword: z
       .string()
@@ -45,7 +45,7 @@ export const SignupSchema = z
   })
 
 export const LoginSchema = z.object({
-  email: z.string().min(1).email("Invalid email"),
+  email: z.email("Invalid email"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
 })
 

@@ -8,10 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { GearIcon } from "@radix-ui/react-icons"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
+import { Settings } from "lucide-react"
 
 type TypeSettingModalProps = {
   // onTimerChange: any;
@@ -36,7 +36,7 @@ const TypingSettingModal = ({
           }
         }}
       >
-        <GearIcon />
+        <Settings />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

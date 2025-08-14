@@ -1,16 +1,16 @@
 services:
-  monyetype:
-    container_name: monyetype
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    ports:
-      - 3000:3000
-    depends_on:
-      - postgres
-    volumes:
-      - .:/app
-      - /app/node_modules
+  # monyetype:
+  #   container_name: monyetype
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
   postgres:
     container_name: postgresdb
     image: postgres

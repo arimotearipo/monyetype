@@ -10,13 +10,13 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { GearIcon } from "@/components/icons/GearIcon"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { TRhythmSettings } from "@/types"
 import { useRhythmSettingsStore } from "@/hooks/zustand/use-rhythm-settings"
 import { useForm, Controller } from "react-hook-form"
+import { Settings } from "lucide-react"
 
 export default function SettingModal({ onOpen }: { onOpen: () => void }) {
   const [open, setOpen] = useState(false)
@@ -37,7 +37,7 @@ export default function SettingModal({ onOpen }: { onOpen: () => void }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant={"ghost"} onClick={onOpen}>
-          <GearIcon />
+          <Settings />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

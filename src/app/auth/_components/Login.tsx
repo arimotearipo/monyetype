@@ -18,11 +18,11 @@ export default function Login() {
     useState<BaseServerActionResponse | null>(null)
 
   const form = useForm<LoginInfo>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-    resolver: zodResolver(LoginSchema),
   })
 
   const {
@@ -31,14 +31,13 @@ export default function Login() {
     formState: { isValid, isSubmitting },
   } = form
 
-  const handleLogin = async (data: LoginInfo) => {
+  const handleLogin = handleSubmit(async (data: LoginInfo) => {
     const res = await loginAction(data)
     setSubmissionStatus(res)
-
     if (res.success) {
       localStorage.setItem("username", res.user.username)
     }
-  }
+  })
 
   return (
     <motion.div
@@ -85,7 +84,7 @@ export default function Login() {
           <div className="flex flex-row justify-between items-center">
             <Button
               disabled={!isValid}
-              onClick={handleSubmit(handleLogin)}
+              onClick={handleLogin}
               variant={"akmalmohtar"}
               className="w-[80px]"
             >

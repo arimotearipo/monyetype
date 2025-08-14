@@ -7,8 +7,6 @@ import { TDifficulty } from "@/types"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import TypingSettingModal from "./TypingSettingModal"
-import { cn } from "@/lib/utils"
-import { CircleIcon } from "@/components/icons/CircleIcon"
 
 const TIMER: number = 10
 const MAX_WORDS: number = 10
